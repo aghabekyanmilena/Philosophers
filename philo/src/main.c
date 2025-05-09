@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:42:10 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/06 20:08:51 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:48:40 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,23 @@
 
 int	main(int argc, char **argv)
 {
-	int	i = 0;
+	int	i;
+
+	i = 1;
+	if (argc == 1)
+		print_error();
+	if (argc != 5 && argc != 6)
+	{
+		write(1, "Wrong number of arguments\n", 27);
+		return (0);
+	}
+	while (i != argc)
+	{
+		check_arguments();
+		i++;
+	}
+
+
 	
+	return (0);
 }

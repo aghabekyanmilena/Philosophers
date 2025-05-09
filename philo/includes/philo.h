@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:42:34 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/06 19:51:26 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:42:29 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <pthread.h>
+# include <limits.h>
 
 typedef struct s_table t_table;
 typedef struct s_philo t_philo;
@@ -36,5 +37,10 @@ struct s_table
 {
 	int		num_philo;
 };
+
+int		ft_atoi(const char *str);
+int		ft_isdigit(int c);
+void	print_error(void);
+
 
 #endif

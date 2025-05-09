@@ -6,11 +6,17 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 20:09:19 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/06 20:10:10 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:35:58 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	print_error(void)
+{
+	write(1, "Error\n", 6);
+	exit(EXIT_FAILURE);
+}
 
 int	ft_atoi(const char *str)
 {
