@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:42:34 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/16 14:09:25 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/05/16 19:27:40 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,6 @@ struct s_table
 	int		num_philo;
 };
 
-int		ft_atoi(const char *str);
-int		ft_isdigit(int c);
-void	print_error(void);
-int		is_number(char *str);
-int		check_args(int argc, char **argv);
 
 
 #endif
