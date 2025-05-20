@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/20 19:17:57 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/20 19:51:10 by miaghabe         ###   ########.fr       */
+/*   Created: 2025/05/20 20:28:34 by miaghabe          #+#    #+#             */
+/*   Updated: 2025/05/20 20:57:08 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,36 @@ void	print_action(t_philo *philo, const char *msg)
 	if (!philo->table->program_stop)
 	{
 		timestamp = get_time_in_ms() - philo->table->start_time;
-		printf("%ld %d %s\n", timestamp, philo->index, msg);
+		printf("[%ld] %d %s\n", timestamp, philo->index, msg);
 	}
 	pthread_mutex_unlock(&philo->table->print_mutex);
 }
 
-void	pick_forks(t_philo *philo)
+void	eat(t_philo *philo)
 {
-	if (philo->index % 2 == 0)
-	{
-		pthread_mutex_lock(philo->left_fork);
-		// printf
-	}
+	pthread_mutex_lock(philo->left_fork);
+	print_action(philo, "has taken a fork");
+	pthread_mutex_lock(philo->right_fork);
+	print_action(philo, "has taken a fork");
+	print_action(philo, "is eating");
+	pthread_mutex_lock(&philo->last_meal_mutex);
+	philo->last_meal = get_time_in_ms();
+	pthread_mutex_unlock(&philo->last_meal_mutex);
+	usleep(philo->table->time_to_eat * 1000);
+	pthread_mutex_lock(&philo->table->num_eats_mutex);
+	philo->eat_count++;
+	pthread_mutex_unlock(&philo->table->num_eats_mutex);
+	pthread_mutex_unlock(philo->right_fork);
+	pthread_mutex_unlock(philo->left_fork);
 }
-// void	philo_eating(t_philo *philo)
-// {
-	
-// }
+
+void	sleep(t_philo *philo)
+{
+	print_action(philo, "is sleeping");
+	usleep(philo->table->time_to_sleep * 1000);
+}
+
+void	philo_think(t_philo *philo)
+{
+	print_action(philo, "is thinking");
+}

@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:42:34 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/20 19:51:22 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/05/20 20:49:28 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ struct s_table
 	t_philo			*philo;
 };
 
-struct s_philo
+typedef struct s_philo
 {
 	int				index;
 	int				eat_count;
@@ -57,7 +57,7 @@ struct s_philo
 	pthread_mutex_t	*right_fork;
 	pthread_t		thread;
 	t_table			*table;
-};
+}	t_philo;
 
 // validation
 int		validation(int argc, char **argv);
@@ -68,17 +68,21 @@ int		init_philo(t_table *table);
 t_table	*init_table(int argc, char **argv);
 int		init_mutexes(t_table *table);
 
-// free
+//free
 void	free_table(t_table *table);
 void	free_philo(t_table *table);
 
 // utils
-void	print_action(t_philo *philo, const char *msg);
-void	error_handling(int num);
-long	get_time_in_ms(void);
 void	*ft_calloc(size_t count, size_t size);
 long	ft_atol(const char *str);
+void	error_handling(int num);
+long	get_time_in_ms(void);
 
+// actions
+void	print_action(t_philo *philo, const char *msg);
+void	eat(t_philo *philo);
+void	sleep(t_philo *philo);
+void	philo_think(t_philo *philo);
 
 
 #endif
