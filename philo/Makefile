@@ -2,7 +2,8 @@ NAME = philo
 SRC_DIR = src
 INC_DIR = includes
 
-SRC = $(SRC_DIR)/main.c $(SRC_DIR)/check.c $(SRC_DIR)/functions.c
+SRC = $(SRC_DIR)/main.c $(SRC_DIR)/utils.c $(SRC_DIR)/parsing.c \
+		$(SRC_DIR)/initialization.c
 
 OBJ = $(SRC:.c=.o)
 
