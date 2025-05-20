@@ -2,13 +2,12 @@ NAME = philo
 SRC_DIR = src
 INC_DIR = includes
 
-SRC = $(SRC_DIR)/main.c $(SRC_DIR)/utils.c $(SRC_DIR)/parsing.c \
-		$(SRC_DIR)/initialization.c
+SRC = $(shell find . -name "*.c")
 
 OBJ = $(SRC:.c=.o)
 
 CC = cc
-CFLAGS = -Wall -Wextra -I $(INC_DIR) -I $(MLX_DIR) -I $(LIBFT_DIR) # -fsanitize=address -Werror
+CFLAGS = -Wall -Wextra -Werror -I $(INC_DIR) -I $(MLX_DIR) -I $(LIBFT_DIR) -g3 -fsanitize=address
 RM = rm -f
 
 all: $(NAME)
