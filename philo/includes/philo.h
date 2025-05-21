@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:42:34 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/20 20:49:28 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:34:06 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ struct s_table
 	long			start_time;
 	int				program_stop;
 	pthread_mutex_t	print_mutex;
+	pthread_mutex_t	program_stop_mutex;
 	pthread_mutex_t	num_eats_mutex;
 	pthread_mutex_t	start_time_mutex;
 	pthread_mutex_t	*forks;
@@ -79,10 +80,12 @@ void	error_handling(int num);
 long	get_time_in_ms(void);
 
 // actions
-void	print_action(t_philo *philo, const char *msg);
+void	print_action(t_philo *philo, const char *str);
 void	eat(t_philo *philo);
-void	sleep(t_philo *philo);
-void	philo_think(t_philo *philo);
-
+void	philo_sleep(t_philo *philo);
+void	think(t_philo *philo);
+void	pick_fork(t_philo *philo);
+void	put_fork(t_philo *philo);
+void	philo_usleep(t_philo *philo, int sleep_time);
 
 #endif

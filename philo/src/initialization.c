@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 17:42:54 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/20 18:42:06 by alisharu         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:03:47 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ int	init_philo(t_table *table)
 		table->philo[index].eat_count = 0;
 		table->philo[index].last_meal = get_time_in_ms();
 		table->philo[index].left_fork = &table->forks[index];
-		table->philo[index].left_fork = &table->forks[(index + 1) % table->philo_count];
+		table->philo[index].left_fork = &table->forks[(index + 1)
+			% table->philo_count];
 		pthread_mutex_init(&table->philo[index].last_meal_mutex, NULL);
 		table->philo->table = table;
 		index++;

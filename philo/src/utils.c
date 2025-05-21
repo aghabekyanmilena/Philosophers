@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 15:34:12 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/20 18:06:09 by alisharu         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:20:31 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,6 @@ void	error_handling(int num)
 		printf("❌ \033[31mError: Isn't valid number\e[0m\n");
 	else if (num == 5)
 		printf("❌ \033[31mError: Could't calloc memory\e[0m\n");
-}
-
-int	ft_strlen(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
-
-void	ft_putstr_fd(char *s, int fd)
-{
-	int	len;
-
-	if (!s)
-		return ;
-	len = ft_strlen(s);
-	write(fd, s, len);
 }
 
 long	ft_atol(const char *str)
@@ -73,23 +53,19 @@ long	ft_atol(const char *str)
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	unsigned char	*ptr;
-	size_t			len;
+	unsigned char	*mem;
 	size_t			i;
 
-	len = size * count;
-	if (len == 0)
-		return (malloc(1));
-	if (len / size != count)
+	if ((size != 0 && count > 65536) || (size > 65536 && count != 0))
 		return (NULL);
-	ptr = (unsigned char *)malloc(len * sizeof(char));
-	if (!ptr)
+	mem = (unsigned char *)malloc(count * size);
+	if (!mem)
 		return (NULL);
 	i = 0;
-	while (i < len)
+	while (i < count * size)
 	{
-		ptr[i] = 0;
+		mem[i] = 0;
 		i++;
 	}
-	return ((void *)ptr);
+	return (mem);
 }
