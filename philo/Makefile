@@ -7,7 +7,7 @@ SRC = $(shell find . -name "*.c")
 OBJ = $(SRC:.c=.o)
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I $(INC_DIR) -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -I $(INC_DIR) #-g3 -fsanitize=address
 RM = rm -f
 
 all: $(NAME)
