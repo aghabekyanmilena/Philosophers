@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 15:34:12 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/21 14:20:31 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/05/22 18:53:23 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 void	error_handling(int num)
 {
 	if (num == 1)
-		printf("❌ \033[31mError: Invalid argument\e[0m\n");
+		printf("Error: Invalid argument\n");
 	else if (num == 2)
-		printf("❌ \033[31mError: Invalid symbols\e[0m\n");
+		printf("Error: Invalid symbols\n");
 	else if (num == 3)
-		printf("❌ \033[31mError: Invalid philosopher count\e[0m\n");
+		printf("Error: Invalid philosopher count\n");
 	else if (num == 4)
-		printf("❌ \033[31mError: Isn't valid number\e[0m\n");
+		printf("Error: Isn't valid number\n");
 	else if (num == 5)
-		printf("❌ \033[31mError: Could't calloc memory\e[0m\n");
+		printf("Error: Could't calloc memory\n");
 }
 
 long	ft_atol(const char *str)

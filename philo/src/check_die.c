@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 17:34:57 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/22 18:41:44 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/05/22 18:53:53 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	*check_dead(void *data)
 				table->program_stop = 1;
 				pthread_mutex_unlock(&table->program_stop_mutex);
 				pthread_mutex_lock(&table->print_mutex);
-				printf("[%ld] %d is dead",get_time_in_ms() - table->start_time, table->philo->index + 1);
+				printf("[%ld] %d is dead\n",get_time_in_ms() - table->start_time, table->philo->index + 1);
 				pthread_mutex_unlock(&table->print_mutex);
 				return (NULL);
 			}
