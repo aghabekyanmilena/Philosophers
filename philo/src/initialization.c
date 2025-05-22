@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 17:42:54 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/21 14:41:02 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/05/22 18:30:08 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	init_mutexes(t_table *table)
 	index = 0;
 	pthread_mutex_init(&table->print_mutex, NULL);
 	pthread_mutex_init(&table->num_eats_mutex, NULL);
-	pthread_mutex_init(&table->start_time_mutex, NULL);
+	pthread_mutex_init(&table->last_eat_mutex, NULL);
 	table->forks = ft_calloc(table->philo_count, sizeof(pthread_mutex_t));
 	if (table->forks == NULL)
 		return (error_handling(CALLOC_ERROR), 0);
@@ -48,7 +48,7 @@ void	free_table(t_table *table)
 		return ;
 	pthread_mutex_destroy(&table->print_mutex);
 	pthread_mutex_destroy(&table->num_eats_mutex);
-	pthread_mutex_destroy(&table->start_time_mutex);
+	pthread_mutex_destroy(&table->last_eat_mutex);
 	if (table->forks)
 	{
 		index = 0;

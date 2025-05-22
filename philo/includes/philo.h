@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:42:34 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/21 13:34:06 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/05/22 18:32:18 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,16 @@ struct s_table
 	long			time_to_die;
 	long			time_to_eat;
 	long			time_to_sleep;
-	long			num_eats;
+	long			num_eats;//5
+	long			full_eat;//1
 	long			start_time;
-	int				program_stop;
+	long			program_stop;
+	pthread_t		is_dead_thread;
+	pthread_t		full_eat_thread;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	program_stop_mutex;
 	pthread_mutex_t	num_eats_mutex;
-	pthread_mutex_t	start_time_mutex;
+	pthread_mutex_t	last_eat_mutex;
 	pthread_mutex_t	*forks;
 	t_philo			*philo;
 };
@@ -87,5 +90,9 @@ void	think(t_philo *philo);
 void	pick_fork(t_philo *philo);
 void	put_fork(t_philo *philo);
 void	philo_usleep(t_philo *philo, int sleep_time);
+
+// checking
+void	*check_dead(void *data);
+void	*check_full_eat(void *data);
 
 #endif

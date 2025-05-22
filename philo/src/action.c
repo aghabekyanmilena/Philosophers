@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 20:28:34 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/21 14:00:22 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/05/22 17:29:34 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ void	eat(t_philo *philo)
 	pick_fork(philo);
 
 	print_action(philo, "is eating");
-	philo_usleep(philo, philo->table->time_to_eat);
 	pthread_mutex_lock(&philo->last_meal_mutex);
 	philo->last_meal = get_time_in_ms();
 	pthread_mutex_unlock(&philo->last_meal_mutex);
+	philo_usleep(philo, philo->table->time_to_eat);
 	pthread_mutex_lock(&philo->table->num_eats_mutex);
 	philo->eat_count++;
 	pthread_mutex_unlock(&philo->table->num_eats_mutex);
