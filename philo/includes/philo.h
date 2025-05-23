@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:42:34 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/22 18:32:18 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/05/23 14:44:57 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ struct s_table
 	long			time_to_die;
 	long			time_to_eat;
 	long			time_to_sleep;
-	long			num_eats;//5
-	long			full_eat;//1
+	long			num_eats;
+	long			full_eat;
 	long			start_time;
 	long			program_stop;
 	pthread_t		is_dead_thread;

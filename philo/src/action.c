@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 20:28:34 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/22 17:29:34 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/05/23 14:52:00 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,18 @@ void	put_fork(t_philo *philo)
 	}
 }
 
-void	eat(t_philo *philo)
+void	eat(t_philo *philo) // jnjel esi sxala
 {
-	pick_fork(philo);
+	pthread_mutex_lock(&philo->table->num_eats_mutex);
+	if (++philo->eat_count == philo->table->num_eats)
+	{
+		philo->table->full_eat++;
+		pthread_mutex_unlock(&philo->table->num_eats_mutex);
 
+		return ;
+	}
+	pthread_mutex_unlock(&philo->table->num_eats_mutex);
+	pick_fork(philo);
 	print_action(philo, "is eating");
 	pthread_mutex_lock(&philo->last_meal_mutex);
 	philo->last_meal = get_time_in_ms();
@@ -58,6 +66,24 @@ void	eat(t_philo *philo)
 	pthread_mutex_unlock(&philo->table->num_eats_mutex);
 	put_fork(philo);
 }
+
+
+void	eat(t_philo *philo)
+{
+	pick_fork(philo);
+	print_action(philo, "is eating");
+	pthread_mutex_lock(&philo->last_meal_mutex);
+	philo->last_meal = get_time_in_ms();
+	pthread_mutex_unlock(&philo->last_meal_mutex);
+	philo_usleep(philo, philo->table->time_to_eat);
+	put_fork(philo);
+	pthread_mutex_lock(&philo->table->num_eats_mutex);
+	philo->eat_count++;
+	if (philo->eat_count == philo->table->num_eats)
+		philo->table->full_eat++;
+	pthread_mutex_unlock(&philo->table->num_eats_mutex);
+}
+
 
 void	philo_sleep(t_philo *philo)
 {

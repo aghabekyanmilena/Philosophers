@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 17:34:57 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/22 18:53:53 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/05/23 14:44:50 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	*check_full_eat(void *data)
 		pthread_mutex_unlock(&table->program_stop_mutex);
 		usleep(100);
 		pthread_mutex_lock(&table->num_eats_mutex);
-		if (table->full_eat == table->num_eats)
+		if (table->full_eat >= table->num_eats)
 		{
 			pthread_mutex_unlock(&table->num_eats_mutex);
 			pthread_mutex_lock(&table->program_stop_mutex);
