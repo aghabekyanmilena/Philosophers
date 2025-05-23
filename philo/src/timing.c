@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:38:16 by alisharu          #+#    #+#             */
-/*   Updated: 2025/05/23 13:37:03 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/05/23 15:25:46 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 void	print_action(t_philo *philo, const char *str)
 {
 	pthread_mutex_lock(&philo->table->program_stop_mutex);
-	if (!philo->table->program_stop)
+	if (philo->table->program_stop)
 	{
-		if (philo->table->program_stop)
-			return ;
 		pthread_mutex_unlock(&philo->table->program_stop_mutex);
-		pthread_mutex_lock(&philo->table->print_mutex);
-		printf("[%ld] %d %s\n",get_time_in_ms()
-			- philo->table->start_time, philo->index, str);
-		pthread_mutex_unlock(&philo->table->print_mutex);
+		return ;
 	}
-	else
-		pthread_mutex_unlock(&philo->table->program_stop_mutex);
+	pthread_mutex_unlock(&philo->table->program_stop_mutex);
+	pthread_mutex_lock(&philo->table->print_mutex);
+	printf("[%ld] %d %s\n",
+		get_time_in_ms() - philo->table->start_time,
+		philo->index,
+		str);
+	pthread_mutex_unlock(&philo->table->print_mutex);
 }
 
 long	get_time_in_ms(void)

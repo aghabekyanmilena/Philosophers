@@ -6,11 +6,21 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:42:10 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/23 13:26:00 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/05/23 15:02:39 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	philo_should_stop(t_philo *philo)
+{
+	int	stop;
+
+	pthread_mutex_lock(&philo->table->program_stop_mutex);
+	stop = philo->table->program_stop;
+	pthread_mutex_unlock(&philo->table->program_stop_mutex);
+	return (stop);
+}
 
 void	*life(void *data)
 {

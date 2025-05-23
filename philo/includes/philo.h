@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:42:34 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/23 14:44:57 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/05/23 15:10:50 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,11 @@ void	think(t_philo *philo);
 void	pick_fork(t_philo *philo);
 void	put_fork(t_philo *philo);
 void	philo_usleep(t_philo *philo, int sleep_time);
+int		philo_should_stop(t_philo *philo);
 
 // checking
 void	*check_dead(void *data);
 void	*check_full_eat(void *data);
+
 
 #endif

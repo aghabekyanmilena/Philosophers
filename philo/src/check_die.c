@@ -6,11 +6,38 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 17:34:57 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/23 14:44:50 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/05/23 15:24:59 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static void	handle_death(t_table *table, int index)
+{
+	pthread_mutex_lock(&table->program_stop_mutex);
+	table->program_stop = 1;
+	pthread_mutex_unlock(&table->program_stop_mutex);
+
+	pthread_mutex_lock(&table->print_mutex);
+	printf("[%ld] %d is dead\n", get_time_in_ms() - table->start_time, table->philo[index].index);
+	pthread_mutex_unlock(&table->print_mutex);
+}
+
+static int	check_philo_death(t_table *table, int index)
+{
+	long	time_since_meal;
+
+	pthread_mutex_lock(&table->philo[index].last_meal_mutex);
+	time_since_meal = get_time_in_ms() - table->philo[index].last_meal;
+	pthread_mutex_unlock(&table->philo[index].last_meal_mutex);
+
+	if (time_since_meal > table->time_to_die)
+	{
+		handle_death(table, index);
+		return (1);
+	}
+	return (0);
+}
 
 void	*check_dead(void *data)
 {
@@ -20,33 +47,20 @@ void	*check_dead(void *data)
 	table = (t_table *)data;
 	while (1)
 	{
-		index = 0;
-		pthread_mutex_lock(&table->program_stop_mutex);
-		if (table->program_stop == 1)
-			return (pthread_mutex_unlock(&table->program_stop_mutex), NULL);
-		pthread_mutex_unlock(&table->program_stop_mutex);
+		if (philo_should_stop(&table->philo[0]))
+			return (NULL);
 		usleep(100);
-		while(index < table->philo_count)
+		index = 0;
+		while (index < table->philo_count)
 		{
-			pthread_mutex_lock(&table->philo[index].last_meal_mutex);
-			if (get_time_in_ms() - table->philo[index].last_meal > table->time_to_die)
-			{
-				pthread_mutex_unlock(&table->philo[index].last_meal_mutex);
-				pthread_mutex_lock(&table->program_stop_mutex);
-				table->program_stop = 1;
-				pthread_mutex_unlock(&table->program_stop_mutex);
-				pthread_mutex_lock(&table->print_mutex);
-				printf("[%ld] %d is dead\n",get_time_in_ms() - table->start_time, table->philo->index + 1);
-				pthread_mutex_unlock(&table->print_mutex);
+			if (check_philo_death(table, index))
 				return (NULL);
-			}
-			else
-				pthread_mutex_unlock(&table->philo[index].last_meal_mutex);
 			index++;
 		}
 	}
 	return (NULL);
 }
+
 
 void	*check_full_eat(void *data)
 {
