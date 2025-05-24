@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 20:28:41 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/24 15:52:51 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/05/24 16:56:10 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	is_valid_number(char *str)
 {
 	long	val;
 	int		i;
-	
+
 	while (*str == ' ' || (*str >= 9 && *str <= 13))
 		str++;
 	if (*str == '+' || *str == '-')

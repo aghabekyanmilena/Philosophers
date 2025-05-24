@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:42:34 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/24 14:47:33 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/05/24 17:02:44 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	error_handling(int num);
 long	get_time_in_ms(void);
 
 // actions
+void	create_threads(t_table *table);
 void	print_action(t_philo *philo, const char *str);
 void	eat(t_philo *philo);
 void	philo_sleep(t_philo *philo);
@@ -95,6 +96,12 @@ int		philo_should_stop(t_philo *philo);
 // checking
 void	*check_dead(void *data);
 void	*check_full_eat(void *data);
+
+// one philo
+int		handle_one_philo(t_table *table);
+
+// routine
+void	*life(void *data);
 
 
 #endif
