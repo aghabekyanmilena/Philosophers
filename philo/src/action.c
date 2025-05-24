@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 20:28:34 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/23 15:11:21 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/05/24 14:49:04 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	pick_fork(t_philo *philo)
 		return ;
 	}
 	pthread_mutex_unlock(&philo->table->program_stop_mutex);
-
 	if (philo->index % 2 == 0)
 	{
 		pthread_mutex_lock(philo->left_fork);

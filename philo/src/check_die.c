@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 17:34:57 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/23 15:24:59 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/05/24 14:44:29 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	*check_dead(void *data)
 	{
 		if (philo_should_stop(&table->philo[0]))
 			return (NULL);
-		usleep(100);
+		usleep(1000); // 100 poxel em 1000
 		index = 0;
 		while (index < table->philo_count)
 		{
