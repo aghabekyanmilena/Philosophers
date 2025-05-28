@@ -68,6 +68,7 @@ void	create_threads(t_table *table)
 	{
 		pthread_create(&table->philo[index].thread, NULL,
 			life, &table->philo[index]);
+		usleep(100);// avelacrel em vor hascni sax ani prcni philon heto hajordy sarqi uxxaki ushadir mna
 		index++;
 	}
 }

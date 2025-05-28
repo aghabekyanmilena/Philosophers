@@ -46,6 +46,7 @@ void	*check_dead(void *data)
 	table = (t_table *)data;
 	while (1)
 	{
+		usleep(100);
 		if (philo_should_stop(&table->philo[0]))
 			return (NULL);
 		usleep(50);
