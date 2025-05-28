@@ -27,7 +27,7 @@ make
 ### Example
 
 ```
-./philo 5 800 200 200
+./philo 5 800 200 200 [4]
 ```
 
 ## Rules & Goals
