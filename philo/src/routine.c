@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:52:41 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/24 16:53:49 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/05/29 16:00:21 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	create_threads(t_table *table)
 	{
 		pthread_create(&table->philo[index].thread, NULL,
 			life, &table->philo[index]);
-		usleep(100);// avelacrel em vor hascni sax ani prcni philon heto hajordy sarqi uxxaki ushadir mna
+		usleep(1000);
 		index++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 20:28:34 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/24 16:54:58 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/05/29 16:34:52 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ void	put_fork(t_philo *philo)
 
 void	eat(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->table->num_eats_mutex);
-	if (philo->eat_count == philo->table->num_eats)
-		philo->table->full_eat++;
-	pthread_mutex_unlock(&philo->table->num_eats_mutex);
+	// pthread_mutex_lock(&philo->table->num_eats_mutex);
+	// if (philo->eat_count == philo->table->num_eats)
+	// 	philo->table->full_eat++;
+	// pthread_mutex_unlock(&philo->table->num_eats_mutex); // es masy na vsyakiiiii hanel em
 	pick_fork(philo);
 	print_action(philo, "is eating");
 	pthread_mutex_lock(&philo->last_meal_mutex);
