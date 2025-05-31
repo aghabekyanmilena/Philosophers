@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:09:42 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/31 19:30:19 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/05/31 20:57:28 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@
 # include <sys/time.h>
 # include <pthread.h>
 # include <semaphore.h>
+
+# define INVALID_ARGUMENT 1
+# define INVALID_SYMBOLS 2
+# define INVALID_PHILO_COUNT 3
+# define INVALID_NUMBER 4
+# define CALLOC_ERROR 5
 
 typedef struct s_table t_table;
 typedef struct s_philo t_philo;
@@ -54,5 +60,17 @@ typedef struct s_philo
 	pid_t			*pid;
 }	t_philo;
 
+// usleep
+void	philo_usleep(t_philo *philo, int sleep_time);
+
+// utils
+void	error_handling(int num);
+long	ft_atol(const char *str);
+void	*ft_calloc(size_t count, size_t size);
+long	get_time_in_ms(void);
+
+// validation
+int	validate_arguments(int argc, char **argv);
+int	validation(int argc, char **argv);
 
 #endif
