@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/20 17:38:16 by alisharu          #+#    #+#             */
-/*   Updated: 2025/05/31 19:21:23 by miaghabe         ###   ########.fr       */
+/*   Created: 2025/05/31 19:21:42 by miaghabe          #+#    #+#             */
+/*   Updated: 2025/05/31 19:22:04 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 long	get_time_in_ms(void)
 {
@@ -31,13 +31,6 @@ void	philo_usleep(t_philo *philo, int sleep_time)
 		current = get_time_in_ms();
 		if (current - start >= sleep_time)
 			break ;
-		pthread_mutex_lock(&philo->table->program_stop_mutex);
-		if (philo->table->program_stop)
-		{
-			pthread_mutex_unlock(&philo->table->program_stop_mutex);
-			return ;
-		}
-		pthread_mutex_unlock(&philo->table->program_stop_mutex);
 		usleep(100);
 	}
 }
