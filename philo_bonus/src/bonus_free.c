@@ -1,16 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bonus_one_philo.c                                  :+:      :+:    :+:   */
+/*   bonus_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/31 20:59:30 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/01 16:54:33 by miaghabe         ###   ########.fr       */
+/*   Created: 2025/06/01 16:26:03 by miaghabe          #+#    #+#             */
+/*   Updated: 2025/06/01 16:35:48 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-// int	handle_one_philo(t_philo *philo)
-// {}
+void	free_table(t_table *table)
+{
+	if (!table)
+		return;
+	if (table->print)
+		sem_close(table->print);
+	if (table->dead)
+		sem_close(table->dead);
+	if (table->fullness)
+		sem_close(table->fullness);
+	if (table->secure_fork)
+		sem_close(table->secure_fork);
+	sem_unlink("/print");
+	sem_unlink("/dead");
+	sem_unlink("/fullness");
+	sem_unlink("/secure_fork");
+	if (table->philo)
+		free(table->philo);
+	free(table);
+}

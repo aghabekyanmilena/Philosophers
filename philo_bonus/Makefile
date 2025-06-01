@@ -2,7 +2,8 @@ NAME = philo_bonus
 SRC_DIR = src
 INC_DIR = includes
 
-SRC = $(shell find . -name "*.c")
+SRC = $(SRC_DIR)/bonus_checkings.c $(SRC_DIR)/bonus_init.c $(SRC_DIR)/bonus_one_philo.c $(SRC_DIR)/bonus_timing.c \
+		$(SRC_DIR)/bonus_utils.c $(SRC_DIR)/main.c $(SRC_DIR)/bonus_free.c $(SRC_DIR)/bonus_actions.c 
 
 OBJ = $(SRC:.c=.o)
 

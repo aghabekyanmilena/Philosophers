@@ -6,11 +6,48 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 21:08:57 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/31 21:11:25 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/01 16:36:29 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
+#include <fcntl.h>
+
+int	init_philos(t_table *table)
+{
+	int	i;
+
+	table->philo = ft_calloc(table->philo_count, sizeof(t_philo));
+	if (!table->philo)
+		return (error_handling(CALLOC_ERROR), 0);
+	for (i = 0; i < table->philo_count; i++)
+	{
+		table->philo[i].index = i + 1;
+		table->philo[i].eat_count = 0;
+		table->philo[i].last_meal = get_time_in_ms();
+		table->philo[i].table = table;
+		table->philo[i].pid = 0;
+	}
+	return (1);
+}
+
+int	init_semaphores(t_table *table)
+{
+	sem_unlink("/print");
+	sem_unlink("/dead");
+	sem_unlink("/fullness");
+	sem_unlink("/secure_fork");
+
+	table->print = sem_open("/print", O_CREAT, 0644, 1);
+	table->dead = sem_open("/dead", O_CREAT, 0644, 0);
+	table->fullness = sem_open("/fullness", O_CREAT, 0644, 0);
+	table->secure_fork = sem_open("/secure_fork", O_CREAT, 0644, table->philo_count);
+	if (table->print == SEM_FAILED || table->dead == SEM_FAILED ||
+		table->fullness == SEM_FAILED || table->secure_fork == SEM_FAILED)
+		return (error_handling(SEMAPHORE_ERROR), 0);
+	return (1);
+}
+
 
 t_table	*init_table(int argc, char **argv)
 {
@@ -23,11 +60,12 @@ t_table	*init_table(int argc, char **argv)
 	table->time_to_die = ft_atol(argv[2]);
 	table->time_to_eat = ft_atol(argv[3]);
 	table->time_to_sleep = ft_atol(argv[4]);
-	table->num_eats = (argc == 6) ? ft_atol(argv[5]) : -1; // sa poxel
+	if (argc == 6)
+		table->num_eats = ft_atol(argv[5]);
 	table->full_eat = 0;
-	if (init_semaphores(table) == 0) // grel es functian
-		return (free_table(table), NULL); // es el
-	if (init_philos(table) == 0) // es el
+	if (init_semaphores(table) == 0)
+		return (free_table(table), NULL);
+	if (init_philos(table) == 0)
 		return (free_table(table), NULL);
 	return (table);
 }

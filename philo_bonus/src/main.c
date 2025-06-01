@@ -6,24 +6,40 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:50:57 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/31 20:58:53 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/01 17:03:09 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
+void	wait_for_children(t_table *table)
+{
+	int	i;
+	int	status;
+
+	i = 0;
+	while (i < table->philo_count)
+	{
+		waitpid(table->philo[i].pid, &status, 0);
+		i++;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_table	*table;
-	int		index;
 
-	index = 0;
-	if (validation(argc, argv) == 0)
-		return (0);
+	if (!validation(argc, argv))
+		return (1);
 	table = init_table(argc, argv);
-	if (table->philo_count == 1)
+	if (!table)
+		return (1);
+	if (!create_philosophers(table))
 	{
-		if (handle_one_philo(table))
-			return (0);
+		free_table(table);
+		return (1);
 	}
+	wait_for_children(table);
+	free_table(table);
+	return (0);
 }

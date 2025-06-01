@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   timing.c                                           :+:      :+:    :+:   */
+/*   bonus_timing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 19:21:42 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/31 19:22:04 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/01 16:55:12 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	philo_usleep(t_philo *philo, int sleep_time)
 {
 	long	start;
 	long	current;
+	(void)philo;
 
 	start = get_time_in_ms();
 	while (1)

@@ -2,7 +2,9 @@ NAME = philo
 SRC_DIR = src
 INC_DIR = includes
 
-SRC = $(shell find . -name "*.c")
+SRC = $(SRC_DIR)/action.c $(SRC_DIR)/check_die.c $(SRC_DIR)/checkings.c $(SRC_DIR)/initialization.c \
+	$(SRC_DIR)/main.c $(SRC_DIR)/one_philo.c $(SRC_DIR)/routine.c $(SRC_DIR)/timing.c \
+	$(SRC_DIR)/utils.c
 
 OBJ = $(SRC:.c=.o)
 
