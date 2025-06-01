@@ -9,7 +9,7 @@ SRC = $(SRC_DIR)/action.c $(SRC_DIR)/check_die.c $(SRC_DIR)/checkings.c $(SRC_DI
 OBJ = $(SRC:.c=.o)
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I $(INC_DIR) #-g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -I $(INC_DIR) #-fsanitize=address
 RM = rm -f
 
 all: $(NAME)
