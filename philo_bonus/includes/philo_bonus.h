@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:09:42 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/01 17:05:50 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/01 18:57:04 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void	*death_monitor(void *arg);
 int	init_philos(t_table *table);
 int	init_semaphores(t_table *table);
 t_table	*init_table(int argc, char **argv);
-	
+
+// one philo
+void	one_philo(t_philo *philo);
 
 #endif
