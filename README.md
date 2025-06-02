@@ -35,3 +35,15 @@ make
 * Each philosopher must take **two forks** to eat.
 * A philosopher dies if they don't eat within `time_to_die`.
 * You must **prevent deadlocks** and **data races** using mutexes.
+
+### Philosophers (Bonus)
+
+This bonus implementation uses **processes** and **semaphores** to solve the Dining Philosophers problem.
+Each philosopher is a separate process that handles its own lifecycle (eating, sleeping, thinking) and shares forks via semaphores. 
+Death and fullness are monitored with additional threads and semaphores.
+
+Features:
+
+* Process-based parallelism
+* Semaphore-protected forks and output
+* Optional monitoring for philosopher death and meals
