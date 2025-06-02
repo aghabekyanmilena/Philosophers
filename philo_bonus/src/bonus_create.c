@@ -25,7 +25,7 @@ int	create_philosophers(t_table *table)
 			return (error_handling(FORK_ERROR), 0);
 		if (pid == 0)
 		{
-			philosopher_routine(&table->philo[i]);
+			philosopher_routine(&table->philo[i]);// es functionny chunes poxi
 			return (0);
 		}
 		else

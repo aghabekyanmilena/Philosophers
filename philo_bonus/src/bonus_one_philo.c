@@ -18,8 +18,8 @@ void	one_philo(t_philo *philo)
 
 	table = philo->table;
 	sem_wait(table->secure_fork);
-	print_status(philo, "has taken a fork");
-	philo_usleep(philo);
-	print_status(philo, "is dead");
+	print_action(philo, "has taken a fork");
+	philo_usleep(philo->table->time_to_eat);
+	print_action(philo, "is dead");
 	sem_post(table->dead);
 }

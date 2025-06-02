@@ -21,9 +21,9 @@ void	eat(t_philo *philo)
 	sem_post(&philo->last_meal_sem);
 	philo_usleep(philo->table->time_to_eat);
 	philo->eat_count++;
+	put_fork(philo);// bardracrel em verev
 	if (philo->eat_count == philo->table->num_eats)
 		sem_post(philo->table->fullness);
-	put_fork(philo);
 }
 
 void	philo_sleep(t_philo *philo)
@@ -39,7 +39,7 @@ void	think(t_philo *philo)
 
 void	pick_fork(t_philo *philo)
 {
-	sem_wait(philo->table->secure_fork);
+	sem_wait(philo->table->secure_fork);//es secure forkery gri fork u menak mi tex wait ara secure fork menak mi philoi depqum
 	print_action(philo, "has taken a fork");
 	sem_wait(philo->table->secure_fork);
 	print_action(philo, "has taken a fork");
@@ -47,17 +47,17 @@ void	pick_fork(t_philo *philo)
 
 void	put_fork(t_philo *philo)
 {
-	sem_post(philo->table->secure_fork);
-	sem_post(philo->table->secure_fork);
+	sem_post(philo->table->secure_fork);//fork
+	sem_post(philo->table->secure_fork);//fork
+	sem_post(philo->table->secure_fork);//secure fork
 }
 
 void	one_philo_pick_fork(t_philo *philo)
 {
 	sem_wait(philo->table->secure_fork);
 	print_action(philo, "has taken a fork");
-	philo_usleep(philo->table->time_to_die + 1);
+	philo_usleep(philo->table->time_to_die + 1);// (time_to_die + 1) * 1000; vor merni
 	print_action(philo, "is dead");
-	sem_post(philo->table->dead);
 	exit(1);
 }
 

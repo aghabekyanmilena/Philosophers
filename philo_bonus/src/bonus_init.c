@@ -37,7 +37,6 @@ int	init_semaphores(t_table *table)
 	sem_unlink("/dead");
 	sem_unlink("/fullness");
 	sem_unlink("/secure_fork");
-
 	table->print = sem_open("/print", O_CREAT, 0644, 1);
 	table->dead = sem_open("/dead", O_CREAT, 0644, 0);
 	table->fullness = sem_open("/fullness", O_CREAT, 0644, 0);
@@ -47,7 +46,6 @@ int	init_semaphores(t_table *table)
 		return (error_handling(SEMAPHORE_ERROR), 0);
 	return (1);
 }
-
 
 t_table	*init_table(int argc, char **argv)
 {
