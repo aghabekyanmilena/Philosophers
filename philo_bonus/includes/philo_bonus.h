@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:09:42 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/01 18:57:04 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/02 14:43:26 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,27 +64,26 @@ struct s_philo
 	pid_t			pid;
 };
 
-// usleep
-void	philo_usleep(t_philo *philo, int sleep_time);
+// actions
+void	eat(t_philo *philo);
+void	philo_sleep(t_philo *philo);
+void	think(t_philo *philo);
+void	pick_fork(t_philo *philo);
+void	put_fork(t_philo *philo);
+void	philo_usleep(int sleep_time);
 
-// utils
-void	error_handling(int num);
-long	ft_atol(const char *str);
-void	*ft_calloc(size_t count, size_t size);
-long	get_time_in_ms(void);
-
-// validation
+// checkings
 int	validate_arguments(int argc, char **argv);
 int	validation(int argc, char **argv);
 
+// create
+int	create_philosophers(t_table *table);
+
+// print
+void	print_action(t_philo *philo, char *msg);
+
 // free
 void	free_table(t_table *table);
-
-// actions
-int	create_philosophers(t_table *table);
-void	philosopher_routine(t_philo *philo);
-void	print_status(t_philo *philo, char *message);
-void	*death_monitor(void *arg);
 
 // init
 int	init_philos(t_table *table);
@@ -93,5 +92,15 @@ t_table	*init_table(int argc, char **argv);
 
 // one philo
 void	one_philo(t_philo *philo);
+void	one_philo_pick_fork(t_philo *philo);
+
+// time
+long	get_time_in_ms(void);
+
+// utils
+void	error_handling(int num);
+long	ft_atol(const char *str);
+void	*ft_calloc(size_t count, size_t size);
+
 
 #endif

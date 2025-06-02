@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 19:21:42 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/01 16:55:12 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/02 14:42:19 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,4 @@ long	get_time_in_ms(void)
 
 	gettimeofday(&tv, NULL);
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
-}
-
-void	philo_usleep(t_philo *philo, int sleep_time)
-{
-	long	start;
-	long	current;
-	(void)philo;
-
-	start = get_time_in_ms();
-	while (1)
-	{
-		current = get_time_in_ms();
-		if (current - start >= sleep_time)
-			break ;
-		usleep(100);
-	}
 }

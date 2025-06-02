@@ -6,13 +6,13 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:37:08 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/01 19:09:01 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/02 14:44:16 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-void	philo_eating(t_philo *philo)
+void	eat(t_philo *philo)
 {
 	pick_fork(philo);
 	print_action(philo, "is eating");
@@ -26,13 +26,13 @@ void	philo_eating(t_philo *philo)
 	put_fork(philo);
 }
 
-void	philo_sleeping(t_philo *philo)
+void	philo_sleep(t_philo *philo)
 {
 	print_action(philo, "is sleeping");
 	philo_usleep(philo->table->time_to_sleep);
 }
 
-void	philo_thinking(t_philo *philo)
+void	think(t_philo *philo)
 {
 	print_action(philo, "is thinking");
 }
@@ -56,7 +56,7 @@ void	one_philo_pick_fork(t_philo *philo)
 	sem_wait(philo->table->secure_fork);
 	print_action(philo, "has taken a fork");
 	philo_usleep(philo->table->time_to_die + 1);
-	print_action(philo, "died");
+	print_action(philo, "is dead");
 	sem_post(philo->table->dead);
 	exit(1);
 }
