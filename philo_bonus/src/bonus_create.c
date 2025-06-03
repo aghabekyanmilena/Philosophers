@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 19:08:24 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/01 19:09:27 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:40:17 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ int	create_philosophers(t_table *table)
 		if (pid < 0)
 			return (error_handling(FORK_ERROR), 0);
 		if (pid == 0)
-		{
-			philosopher_routine(&table->philo[i]);// es functionny chunes poxi
-			return (0);
-		}
+			philo_life(&table->philo[i]);
 		else
 			table->philo[i].pid = pid;
 		i++;
@@ -41,6 +38,6 @@ void	print_action(t_philo *philo, char *msg)
 
 	sem_wait(philo->table->print);
 	time = get_time_in_ms() - philo->table->start_time;
-	printf("%ld %d %s\n", time, philo->index + 1, msg);
+	printf("%ld %d %s\n", time, philo->index, msg);
 	sem_post(philo->table->print);
 }

@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:09:42 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/02 14:43:26 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:26:58 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <sys/wait.h>
 # include <pthread.h>
 # include <semaphore.h>
+# include <signal.h>
+#include <fcntl.h>
 
 # define INVALID_ARGUMENT 1
 # define INVALID_SYMBOLS 2
@@ -43,15 +45,23 @@ struct s_table
 	long		num_eats;
 	long		full_eat;
 	long		start_time;
-	// sem_t		*start_time;
+	long		program_stop;
 	sem_t		*print;
 	sem_t		*fullness;
 	sem_t		*dead;
-	sem_t		*secure_fork;
+	sem_t		*secure_fork; // for one philo
+	sem_t		*forks;
+	sem_t		*deadlock_protect; // sa nor em avelacrel
 	pthread_t	is_dead_thread;
 	pthread_t	full_eat_thread;
 	t_philo		*philo;
 };
+
+// haskanal incha u avelacnel structum ete petqa
+//	int			all_dead
+//	pid_t		*pid;
+//	pthread_t	monitoring_thread;
+// sem_t		*all_dead_sem;
 
 struct s_philo
 {
@@ -71,10 +81,13 @@ void	think(t_philo *philo);
 void	pick_fork(t_philo *philo);
 void	put_fork(t_philo *philo);
 void	philo_usleep(int sleep_time);
+void	*philo_life(void *arg);
 
-// checkings
-int	validate_arguments(int argc, char **argv);
-int	validation(int argc, char **argv);
+// die case
+void	*monitor_death(void *arg);
+
+// full case
+void	philos_full(t_table *table);
 
 // create
 int	create_philosophers(t_table *table);
@@ -96,6 +109,10 @@ void	one_philo_pick_fork(t_philo *philo);
 
 // time
 long	get_time_in_ms(void);
+
+// checkings
+int	validate_arguments(int argc, char **argv);
+int	validation(int argc, char **argv);
 
 // utils
 void	error_handling(int num);

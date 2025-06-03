@@ -4,7 +4,7 @@ INC_DIR = includes
 
 SRC = $(SRC_DIR)/bonus_checkings.c $(SRC_DIR)/bonus_init.c $(SRC_DIR)/bonus_one_philo.c $(SRC_DIR)/bonus_timing.c \
 		$(SRC_DIR)/bonus_utils.c $(SRC_DIR)/main.c $(SRC_DIR)/bonus_free.c $(SRC_DIR)/bonus_actions.c \
-		$(SRC_DIR)/bonus_create.c
+		$(SRC_DIR)/bonus_create.c $(SRC_DIR)/bonus_life.c $(SRC_DIR)/bonus_die_case.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:37:08 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/02 14:44:16 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:44:41 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	eat(t_philo *philo)
 	sem_post(&philo->last_meal_sem);
 	philo_usleep(philo->table->time_to_eat);
 	philo->eat_count++;
-	put_fork(philo);// bardracrel em verev
+	put_fork(philo);
 	if (philo->eat_count == philo->table->num_eats)
 		sem_post(philo->table->fullness);
 }
@@ -39,26 +39,27 @@ void	think(t_philo *philo)
 
 void	pick_fork(t_philo *philo)
 {
-	sem_wait(philo->table->secure_fork);//es secure forkery gri fork u menak mi tex wait ara secure fork menak mi philoi depqum
+	sem_wait(philo->table->forks);
 	print_action(philo, "has taken a fork");
-	sem_wait(philo->table->secure_fork);
 	print_action(philo, "has taken a fork");
 }
 
 void	put_fork(t_philo *philo)
 {
-	sem_post(philo->table->secure_fork);//fork
-	sem_post(philo->table->secure_fork);//fork
-	sem_post(philo->table->secure_fork);//secure fork
+	sem_post(philo->table->forks);
+	sem_post(philo->table->forks);
+	sem_post(philo->table->deadlock_protect);
 }
 
 void	one_philo_pick_fork(t_philo *philo)
 {
 	sem_wait(philo->table->secure_fork);
 	print_action(philo, "has taken a fork");
-	philo_usleep(philo->table->time_to_die + 1);// (time_to_die + 1) * 1000; vor merni
+	philo_usleep(philo->table->time_to_die + 1);
 	print_action(philo, "is dead");
-	exit(1);
+	sem_post(philo->table->dead);
+	sem_post(philo->table->secure_fork);
+	return ;
 }
 
 void	philo_usleep(int sleep_time)

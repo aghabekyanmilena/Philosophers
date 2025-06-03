@@ -6,12 +6,11 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 21:08:57 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/01 16:36:29 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:26:49 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
-#include <fcntl.h>
 
 int	init_philos(t_table *table)
 {
@@ -27,6 +26,7 @@ int	init_philos(t_table *table)
 		table->philo[i].last_meal = get_time_in_ms();
 		table->philo[i].table = table;
 		table->philo[i].pid = 0;
+		sem_init(&table->philo[i].last_meal_sem, 1, 1);
 	}
 	return (1);
 }
@@ -36,7 +36,13 @@ int	init_semaphores(t_table *table)
 	sem_unlink("/print");
 	sem_unlink("/dead");
 	sem_unlink("/fullness");
-	sem_unlink("/secure_fork");
+	// sem_unlink("/secure_fork");
+	sem_unlink("/forks");
+	sem_unlink("/deadlock_protect");
+	table->forks = sem_open("/forks", O_CREAT, 0644, table->philo_count);
+	table->deadlock_protect = sem_open("/deadlock_protect", O_CREAT, 0644, 1);
+	if (table->forks == SEM_FAILED || table->deadlock_protect == SEM_FAILED)
+		return (error_handling(SEMAPHORE_ERROR), 0);
 	table->print = sem_open("/print", O_CREAT, 0644, 1);
 	table->dead = sem_open("/dead", O_CREAT, 0644, 0);
 	table->fullness = sem_open("/fullness", O_CREAT, 0644, 0);
