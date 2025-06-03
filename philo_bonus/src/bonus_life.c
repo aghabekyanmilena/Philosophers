@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:49:28 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/03 14:44:44 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/03 16:47:20 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*philo_life(void *arg)
 	if (philo->table->philo_count == 1)
 		return (one_philo_pick_fork(philo), NULL);
 	if (philo->index % 2 == 0)
-		usleep(100);
+		usleep(1000);
 	while (1)
 	{
 		pick_fork(philo);

@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:26:03 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/01 16:35:48 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/03 16:31:54 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	free_table(t_table *table)
 	sem_unlink("/print");
 	sem_unlink("/dead");
 	sem_unlink("/fullness");
-	sem_unlink("/secure_fork");
+	sem_unlink("/forks");
 	if (table->philo)
 		free(table->philo);
 	free(table);

@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 19:08:24 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/03 15:40:17 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/03 16:39:05 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ void	print_action(t_philo *philo, char *msg)
 
 	sem_wait(philo->table->print);
 	time = get_time_in_ms() - philo->table->start_time;
-	printf("%ld %d %s\n", time, philo->index, msg);
+	printf("[%ld] %d %s\n",
+		get_time_in_ms() - philo->table->start_time,
+		philo->index,
+		msg);
 	sem_post(philo->table->print);
 }

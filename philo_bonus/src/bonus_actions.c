@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:37:08 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/03 15:44:41 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/03 16:47:00 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	pick_fork(t_philo *philo)
 {
 	sem_wait(philo->table->forks);
 	print_action(philo, "has taken a fork");
+	sem_wait(philo->table->forks);
 	print_action(philo, "has taken a fork");
 }
 
@@ -48,7 +49,7 @@ void	put_fork(t_philo *philo)
 {
 	sem_post(philo->table->forks);
 	sem_post(philo->table->forks);
-	sem_post(philo->table->deadlock_protect);
+	// sem_post(philo->table->deadlock_protect);
 }
 
 void	one_philo_pick_fork(t_philo *philo)
