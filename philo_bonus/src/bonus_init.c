@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 21:08:57 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/03 15:26:49 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/03 19:36:19 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	init_philos(t_table *table)
 	table->philo = ft_calloc(table->philo_count, sizeof(t_philo));
 	if (!table->philo)
 		return (error_handling(CALLOC_ERROR), 0);
-	for (i = 0; i < table->philo_count; i++)
+	i = 0;
+	while (i < table->philo_count)
 	{
 		table->philo[i].index = i + 1;
 		table->philo[i].eat_count = 0;
@@ -27,6 +28,7 @@ int	init_philos(t_table *table)
 		table->philo[i].table = table;
 		table->philo[i].pid = 0;
 		sem_init(&table->philo[i].last_meal_sem, 1, 1);
+		i++;
 	}
 	return (1);
 }
@@ -36,7 +38,7 @@ int	init_semaphores(t_table *table)
 	sem_unlink("/print");
 	sem_unlink("/dead");
 	sem_unlink("/fullness");
-	// sem_unlink("/secure_fork");
+	sem_unlink("/secure_fork");
 	sem_unlink("/forks");
 	sem_unlink("/deadlock_protect");
 	table->forks = sem_open("/forks", O_CREAT, 0644, table->philo_count);

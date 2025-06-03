@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:09:42 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/03 15:26:58 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/03 18:01:02 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ struct s_philo
 	int				index;
 	int				eat_count;
 	long long		last_meal;
-	sem_t			last_meal_sem;
+	sem_t			*last_meal_sem;
 	pthread_t		thread;
 	t_table			*table;
 	pid_t			pid;
@@ -84,13 +84,10 @@ void	philo_usleep(int sleep_time);
 void	*philo_life(void *arg);
 
 // die case
-void	*monitor_death(void *arg);
-
-// full case
-void	philos_full(t_table *table);
+void	*check_philo_die(void	*data);
 
 // create
-int	create_philosophers(t_table *table);
+int		create_philosophers(t_table *table);
 
 // print
 void	print_action(t_philo *philo, char *msg);
@@ -99,8 +96,8 @@ void	print_action(t_philo *philo, char *msg);
 void	free_table(t_table *table);
 
 // init
-int	init_philos(t_table *table);
-int	init_semaphores(t_table *table);
+int		init_philos(t_table *table);
+int		init_semaphores(t_table *table);
 t_table	*init_table(int argc, char **argv);
 
 // one philo
@@ -111,8 +108,8 @@ void	one_philo_pick_fork(t_philo *philo);
 long	get_time_in_ms(void);
 
 // checkings
-int	validate_arguments(int argc, char **argv);
-int	validation(int argc, char **argv);
+int		validate_arguments(int argc, char **argv);
+int		validation(int argc, char **argv);
 
 // utils
 void	error_handling(int num);
