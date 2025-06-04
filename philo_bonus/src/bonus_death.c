@@ -6,20 +6,30 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 16:55:52 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/04 19:09:11 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/04 20:52:37 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
+// void	create_threads(t_table *table)
+// {
+// 	pthread_create(&table->is_dead_thread, NULL, death_monitor, table);
+// 	// if (table->num_eats > 0)
+// 	// 	pthread_create(&table->full_eat_thread	, NULL, philo_full_eat, table);
+// 	pthread_join(table->is_dead_thread, NULL);
+// 	// if (table->num_eats > 0)
+// 	// 	pthread_join(table->full_eat_thread, NULL);
+// }
+
 void	create_threads(t_table *table)
 {
 	pthread_create(&table->is_dead_thread, NULL, death_monitor, table);
-	// if (table->num_eats > 0)
-	// 	pthread_create(&table->full_eat_thread	, NULL, philo_full_eat, table);
+	if (table->num_eats > 0)
+		pthread_create(&table->full_eat_thread, NULL, philo_full_eat, table);
 	pthread_join(table->is_dead_thread, NULL);
-	// if (table->num_eats > 0)
-	// 	pthread_join(table->full_eat_thread, NULL);
+	if (table->num_eats > 0)
+		pthread_join(table->full_eat_thread, NULL);
 }
 
 void	*death_monitor(void *data)
@@ -32,11 +42,6 @@ void	*death_monitor(void *data)
 	i = 0;
 	while (i < table->philo_count)
 		kill(table->pid[i++], SIGKILL);
-	// sem_wait(table->all_dead);
-	// table->died = 1;
-	// sem_post(table->all_dead);
-	// if (table->num_eats)
-	// 	sem_post(table->fullness);
 	return (NULL);
 }
 
@@ -62,28 +67,44 @@ void	*check_philo_die(void	*data)
 	return (NULL);
 }
 
+// void	*philo_full_eat(void *data)
+// {
+// 	t_table	*table;
+// 	int		count;
+
+// 	table = (t_table *)data;
+// 	count = 0;
+// 	while (1)
+// 	{
+// 		sem_wait(table->fullness);
+// 		sem_wait(table->all_dead);
+// 		if (table->all_dead)
+// 			return (sem_post(table->all_dead), NULL);
+// 		sem_post(table->all_dead);
+// 		if (++count == table->philo_count)
+// 		{
+// 			sem_wait(table->print);
+// 			printf("[%ld] Dinner is over\n",
+// 				get_time_in_ms() - table->start_time);
+// 			sem_post(table->dead);
+// 			return (NULL);
+// 		}
+// 	}
+// 	return (NULL);
+// }
+
 void	*philo_full_eat(void *data)
 {
-	t_table	*table;
-	int		count;
+	t_table	*table = (t_table *)data;
+	int		count = 0;
 
-	table = (t_table *)data;
-	count = 0;
-	while (1)
+	while (count < table->philo_count)
 	{
 		sem_wait(table->fullness);
-		sem_wait(table->all_dead);
-		if (table->all_dead)
-			return (sem_post(table->all_dead), NULL);
-		sem_post(table->all_dead);
-		if (++count == table->philo_count)
-		{
-			sem_wait(table->print);
-			printf("[%ld] Dinner is over\n",
-				get_time_in_ms() - table->start_time);
-			sem_post(table->dead);
-			return (NULL);
-		}
+		count++;
 	}
+	sem_wait(table->print);
+	printf("[%ld] Dinner is over\n", get_time_in_ms() - table->start_time);
+	sem_post(table->dead);
 	return (NULL);
 }

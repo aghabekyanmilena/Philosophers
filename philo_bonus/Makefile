@@ -9,7 +9,7 @@ SRC = $(SRC_DIR)/bonus_checkings.c $(SRC_DIR)/bonus_init.c $(SRC_DIR)/bonus_one_
 OBJ = $(SRC:.c=.o)
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I $(INC_DIR) # -g3 -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -I $(INC_DIR) -g3 -fsanitize=address
 RM = rm -f
 
 all: $(NAME)

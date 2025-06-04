@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 19:08:24 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/04 18:59:43 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/04 20:19:14 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	create_philosophers(t_table *table)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (i < table->philo_count)
@@ -25,6 +25,11 @@ int	create_philosophers(t_table *table)
 		if (table->pid[i] == 0)
 		{
 			philo_life(&table->philo[i]);
+			sem_close(table->print);
+			sem_close(table->dead);
+			sem_close(table->fullness);
+			sem_close(table->secure_fork);
+			sem_close(table->forks);
 			exit (0);
 		}
 		i++;
