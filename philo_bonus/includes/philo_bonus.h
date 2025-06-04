@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:09:42 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/03 18:01:02 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/04 19:15:21 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <pthread.h>
 # include <semaphore.h>
 # include <signal.h>
-#include <fcntl.h>
+# include <fcntl.h>
 
 # define INVALID_ARGUMENT 1
 # define INVALID_SYMBOLS 2
@@ -32,6 +32,7 @@
 # define CALLOC_ERROR 5
 # define SEMAPHORE_ERROR 6
 # define FORK_ERROR 7
+# define THREAD_ERROR 8
 
 typedef struct s_table t_table;
 typedef struct s_philo t_philo;
@@ -45,23 +46,19 @@ struct s_table
 	long		num_eats;
 	long		full_eat;
 	long		start_time;
-	long		program_stop;
+	long		died;
 	sem_t		*print;
 	sem_t		*fullness;
 	sem_t		*dead;
 	sem_t		*secure_fork; // for one philo
 	sem_t		*forks;
 	sem_t		*deadlock_protect; // sa nor em avelacrel
+	sem_t		*all_dead;
 	pthread_t	is_dead_thread;
 	pthread_t	full_eat_thread;
 	t_philo		*philo;
+	pid_t		*pid;
 };
-
-// haskanal incha u avelacnel structum ete petqa
-//	int			all_dead
-//	pid_t		*pid;
-//	pthread_t	monitoring_thread;
-// sem_t		*all_dead_sem;
 
 struct s_philo
 {
@@ -71,23 +68,22 @@ struct s_philo
 	sem_t			*last_meal_sem;
 	pthread_t		thread;
 	t_table			*table;
-	pid_t			pid;
 };
 
 // actions
-void	eat(t_philo *philo);
-void	philo_sleep(t_philo *philo);
-void	think(t_philo *philo);
 void	pick_fork(t_philo *philo);
 void	put_fork(t_philo *philo);
 void	philo_usleep(int sleep_time);
 void	*philo_life(void *arg);
+void	*philo_full_eat(void *data);
 
 // die case
 void	*check_philo_die(void	*data);
+void	*death_monitor(void		*data);
 
 // create
 int		create_philosophers(t_table *table);
+void	create_threads(t_table *table);
 
 // print
 void	print_action(t_philo *philo, char *msg);
@@ -115,6 +111,10 @@ int		validation(int argc, char **argv);
 void	error_handling(int num);
 long	ft_atol(const char *str);
 void	*ft_calloc(size_t count, size_t size);
+char	*ft_itoa(int n);
+char	*ft_strdup(const char *s1);
+size_t	ft_strlen(const char *str);
+int		ft_strcmp(char *s1, char *s2);
 
 
 #endif

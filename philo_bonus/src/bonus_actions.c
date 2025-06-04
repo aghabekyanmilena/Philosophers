@@ -6,36 +6,11 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:37:08 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/03 16:47:00 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/04 19:15:00 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
-
-void	eat(t_philo *philo)
-{
-	pick_fork(philo);
-	print_action(philo, "is eating");
-	sem_wait(&philo->last_meal_sem);
-	philo->last_meal = get_time_in_ms();
-	sem_post(&philo->last_meal_sem);
-	philo_usleep(philo->table->time_to_eat);
-	philo->eat_count++;
-	put_fork(philo);
-	if (philo->eat_count == philo->table->num_eats)
-		sem_post(philo->table->fullness);
-}
-
-void	philo_sleep(t_philo *philo)
-{
-	print_action(philo, "is sleeping");
-	philo_usleep(philo->table->time_to_sleep);
-}
-
-void	think(t_philo *philo)
-{
-	print_action(philo, "is thinking");
-}
 
 void	pick_fork(t_philo *philo)
 {

@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 15:34:12 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/31 20:54:12 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/04 17:05:41 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,95 @@ void	*ft_calloc(size_t count, size_t size)
 		i++;
 	}
 	return (mem);
+}
+
+static int	count_len(int n)
+{
+	int	len;
+
+	len = 0;
+	if (n < 0)
+	{
+		n = -n;
+		len++;
+	}
+	while (n)
+	{
+		n = n / 10;
+		len++;
+	}
+	return (len);
+}
+
+char	*ft_itoa(int n)
+{
+	int		rem;
+	char	*str;
+	int		len;
+
+	if (n == 0)
+		return (ft_strdup("0"));
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	len = count_len(n);
+	str = (char *)malloc(len + 1);
+	if (!str)
+		return (NULL);
+	if (n < 0)
+	{
+		n = -n;
+		str[0] = '-';
+	}
+	str[len] = '\0';
+	while (n)
+	{
+		rem = n % 10;
+		str[len-- -1] = rem + '0';
+		n = n / 10;
+	}
+	return (str);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	size_t	i;
+	char	*s1_dup;
+
+	i = 0;
+	s1_dup = (char *)malloc(ft_strlen(s1) + 1);
+	if (!s1_dup)
+		return (NULL);
+	while (s1[i] != '\0')
+	{
+		s1_dup[i] = s1[i];
+		i++;
+	}
+	s1_dup[i] = '\0';
+	return ((char *)s1_dup);
+}
+
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
+}
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	unsigned int	i;
+
+	i = 0;
+	if (!s1 || !s2)
+		return (0);
+	while ((s1[i] || s2[i]))
+	{
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		++i;
+	}
+	return (0);
 }

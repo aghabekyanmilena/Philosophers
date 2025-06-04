@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:49:28 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/03 16:47:20 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/04 19:16:04 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 void	*philo_life(void *arg)
 {
-	t_philo	*philo = (t_philo *)arg;
+	t_philo		*philo;
+	pthread_t	death_thread;
 
+	philo = (t_philo *)arg;
+	pthread_create(&death_thread, NULL, check_philo_die, philo);
 	if (philo->table->philo_count == 1)
 		return (one_philo_pick_fork(philo), NULL);
 	if (philo->index % 2 == 0)
@@ -23,9 +26,9 @@ void	*philo_life(void *arg)
 	while (1)
 	{
 		pick_fork(philo);
-		sem_wait(&philo->last_meal_sem);
+		sem_wait(philo->last_meal_sem);
 		philo->last_meal = get_time_in_ms();
-		sem_post(&philo->last_meal_sem);
+		sem_post(philo->last_meal_sem);
 		print_action(philo, "is eating");
 		philo_usleep(philo->table->time_to_eat);
 		philo->eat_count++;
