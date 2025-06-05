@@ -6,12 +6,12 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:09:42 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/04 20:40:26 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:46:26 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_BONUS_H
-#define PHILO_BONUS_H
+# define PHILO_BONUS_H
 
 # include <unistd.h>
 # include <stdio.h>
@@ -33,9 +33,10 @@
 # define SEMAPHORE_ERROR 6
 # define FORK_ERROR 7
 # define THREAD_ERROR 8
+# define DEAD 9
 
-typedef struct s_table t_table;
-typedef struct s_philo t_philo;
+typedef struct s_table	t_table;
+typedef struct s_philo	t_philo;
 
 struct s_table
 {
@@ -50,9 +51,9 @@ struct s_table
 	sem_t		*print;
 	sem_t		*fullness;
 	sem_t		*dead;
-	sem_t		*secure_fork; // for one philo
+	sem_t		*secure_fork;
 	sem_t		*forks;
-	sem_t		*deadlock_protect; // sa nor em avelacrel
+	sem_t		*deadlock_protect;
 	sem_t		*all_dead;
 	pthread_t	is_dead_thread;
 	pthread_t	full_eat_thread;
@@ -114,7 +115,5 @@ void	*ft_calloc(size_t count, size_t size);
 char	*ft_itoa(int n);
 char	*ft_strdup(const char *s1);
 size_t	ft_strlen(const char *str);
-int		ft_strcmp(char *s1, char *s2);
-
 
 #endif

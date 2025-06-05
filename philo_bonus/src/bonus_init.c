@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 21:08:57 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/04 20:26:52 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:39:03 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	init_philos(t_table *table)
 		table->philo[i].table = table;
 		name = ft_itoa(i);
 		sem_unlink(name);
-		table->philo[i].last_meal_sem = sem_open(name, O_CREAT | O_EXCL, 0644, 1);
+		table->philo[i].last_meal_sem = sem_open(name, O_CREAT | O_EXCL,
+				0644, 1);
 		i++;
 		free(name);
 	}
@@ -51,9 +52,10 @@ int	init_semaphores(t_table *table)
 	table->print = sem_open("/print", O_CREAT, 0644, 1);
 	table->dead = sem_open("/dead", O_CREAT, 0644, 0);
 	table->fullness = sem_open("/fullness", O_CREAT, 0644, 0);
-	table->secure_fork = sem_open("/secure_fork", O_CREAT, 0644, table->philo_count);
-	if (table->print == SEM_FAILED || table->dead == SEM_FAILED ||
-		table->fullness == SEM_FAILED || table->secure_fork == SEM_FAILED)
+	table->secure_fork = sem_open("/secure_fork", O_CREAT, 0644,
+			table->philo_count);
+	if (table->print == SEM_FAILED || table->dead == SEM_FAILED
+		|| table->fullness == SEM_FAILED || table->secure_fork == SEM_FAILED)
 		return (error_handling(SEMAPHORE_ERROR), 0);
 	return (1);
 }

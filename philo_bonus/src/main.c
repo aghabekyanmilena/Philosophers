@@ -6,24 +6,11 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 17:50:57 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/04 20:41:13 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:29:48 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
-
-// void	wait_for_children(t_table *table)
-// {
-// 	int	i;
-// 	int	status;
-
-// 	i = 0;
-// 	while (i < table->philo_count)
-// 	{
-// 		waitpid(table->pid[i], &status, 0);
-// 		i++;
-// 	}
-// }
 
 int	main(int argc, char **argv)
 {
@@ -43,7 +30,6 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	create_threads(table);
-	// wait_for_children(table);
 	free_table(table);
 	return (0);
 }

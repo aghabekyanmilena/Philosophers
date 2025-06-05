@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 20:59:30 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/02 14:44:36 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:30:01 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	one_philo(t_philo *philo)
 {
-	t_table *table;
+	t_table	*table;
 
 	table = philo->table;
 	sem_wait(table->secure_fork);

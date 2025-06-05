@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:42:34 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/24 17:02:44 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:58:06 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,5 @@ int		handle_one_philo(t_table *table);
 
 // routine
 void	*life(void *data);
-
 
 #endif
