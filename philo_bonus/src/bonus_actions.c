@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:37:08 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/04 19:15:00 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/06 17:30:13 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	put_fork(t_philo *philo)
 {
 	sem_post(philo->table->forks);
 	sem_post(philo->table->forks);
-	// sem_post(philo->table->deadlock_protect);
+	sem_post(philo->table->deadlock_protect);
 }
 
 void	one_philo_pick_fork(t_philo *philo)
