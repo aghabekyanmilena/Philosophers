@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:37:08 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/06 17:30:13 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/07 14:46:11 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ void	philo_usleep(int sleep_time)
 		current = get_time_in_ms();
 		if (current - start >= sleep_time)
 			break ;
-		usleep(100);
+		usleep(1000);
 	}
 }

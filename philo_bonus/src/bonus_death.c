@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 16:55:52 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/05 14:35:45 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/07 14:48:34 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,12 @@ void	*check_philo_die(void *data)
 	philo = (t_philo *)data;
 	while (1)
 	{
-		usleep(100);
+		usleep(1000);
 		sem_wait(philo->last_meal_sem);
 		if (get_time_in_ms() - philo->last_meal > philo->table->time_to_die)
 		{
 			sem_post(philo->last_meal_sem);
-			sem_wait(philo->table->print);
-			printf("[%ld] %d is dead\n",
-				get_time_in_ms() - philo->table->start_time,
-				philo->index);
-			sem_post(philo->table->print);
+			print_action(philo, "is dead");
 			sem_post(philo->table->dead);
 			exit(DEAD);
 		}

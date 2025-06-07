@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 19:08:24 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/05 14:49:40 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/07 14:50:41 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	create_philosophers(t_table *table)
 			sem_close(table->fullness);
 			sem_close(table->secure_fork);
 			sem_close(table->forks);
-			exit (0);
+			exit (EXIT_FAILURE);
 		}
 		i++;
 	}
