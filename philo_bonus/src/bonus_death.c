@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 16:55:52 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/07 14:48:34 by miaghabe         ###   ########.fr       */
+/*   Updated: 2025/06/13 19:22:23 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,11 @@ void	*death_monitor(void *data)
 	sem_wait(table->dead);
 	i = 0;
 	while (i < table->philo_count)
+	{
 		kill(table->pid[i++], SIGKILL);
+		sem_post(table->fullness);
+	}
+	//pahel flag u avelacnel ete 1a el chstugi
 	return (NULL);
 }
 
@@ -68,6 +72,7 @@ void	*philo_full_eat(void *data)
 		sem_wait(table->fullness);
 		count++;
 	}
+	if ()
 	sem_wait(table->print);
 	printf("[%ld] Dinner is over\n", get_time_in_ms() - table->start_time);
 	sem_post(table->dead);
