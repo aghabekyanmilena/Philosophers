@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:49:28 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/07 14:45:49 by miaghabe         ###   ########.fr       */
+/*   Updated: 2026/02/17 19:32:43 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ void	*philo_life(void *arg)
 		philo_usleep(philo->table->time_to_sleep);
 		print_action(philo, "is thinking");
 	}
+	pthread_join(death_thread, NULL);
 	return (NULL);
 }

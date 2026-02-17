@@ -6,7 +6,7 @@
 /*   By: miaghabe <miaghabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 16:55:52 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/06/13 19:23:18 by miaghabe         ###   ########.fr       */
+/*   Updated: 2026/02/17 19:33:15 by miaghabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ void	*death_monitor(void *data)
 	table = (t_table *)data;
 	sem_wait(table->dead);
 	i = 0;
+
 	while (i < table->philo_count)
 	{
 		kill(table->pid[i++], SIGKILL);
 		sem_post(table->fullness);
 	}
-	//pahel flag u avelacnel ete 1a el chstugi
 	return (NULL);
 }
 
@@ -60,21 +60,42 @@ void	*check_philo_die(void *data)
 	return (NULL);
 }
 
-void	*philo_full_eat(void *data)
-{
-	t_table	*table;
-	int		count;
+// void *philo_full_eat(void *data)
+// {
+// 	t_table	*table = (t_table *)data;
+// 	int		count = 0;
 
-	count = 0;
-	table = (t_table *)data;
-	while (count < table->philo_count)
-	{
-		sem_wait(table->fullness);
-		count++;
-	}
-	// if ()
-	sem_wait(table->print);
-	printf("[%ld] Dinner is over\n", get_time_in_ms() - table->start_time);
-	sem_post(table->dead);
-	return (NULL);
+// 	while (count < table->philo_count)
+// 	{
+// 		sem_wait(table->fullness);
+// 		if (table->philo && table->philo->eat_count >= table->num_eats)
+// 			table->full_eat = 1;
+// 		count++;
+// 		sem_post(table->fullness);
+// 	}
+// 	sem_wait(table->print);
+// 	printf("[%ld] Dinner is over\n", 
+// 		get_time_in_ms() - table->start_time);
+// 	sem_post(table->dead);
+// 	return (NULL);
+// }
+
+void *philo_full_eat(void *data)
+{
+    t_table *table = (t_table *)data;
+    int count = 0;
+
+    while (count < table->philo_count)
+    {
+        sem_wait(table->fullness);
+        count++;
+		sem_post(table->fullness);
+    }
+
+    sem_wait(table->print);
+    printf("[%ld] Dinner is over\n",
+        get_time_in_ms() - table->start_time);
+    sem_post(table->dead);
+
+    return NULL;
 }
